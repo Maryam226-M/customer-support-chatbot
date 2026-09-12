@@ -1,0 +1,34 @@
+{
+  "tests": [
+    {
+      "id": "t1_bug_report",
+      "prompt": "The checkout page crashes when I click the Pay button",
+      "expected": "Acknowledges the bug report and asks for either the steps to reproduce or the customer's environment. Should NOT try to file the ticket yet since not all information is collected."
+    },
+    {
+      "id": "t2_bug_report_followup",
+      "prompt": "I'm using Chrome on Windows 11",
+      "expected": "Continues the bug report conversation by asking for the remaining missing information. Should NOT file the ticket yet."
+    },
+    {
+      "id": "t3_faq_shipping",
+      "prompt": "How long does shipping take?",
+      "expected": "Answers the shipping question using information from the FAQ. Should provide specific details about shipping times."
+    },
+    {
+      "id": "t4_faq_returns",
+      "prompt": "What is your return policy?",
+      "expected": "Answers the returns question using information from the FAQ. Should provide specific details about the return window and process."
+    },
+    {
+      "id": "t5_faq_uncovered",
+      "prompt": "Do you offer gift wrapping?",
+      "expected": "Recognizes that this question is not covered in the FAQ and politely redirects the customer to the human support phone line."
+    },
+    {
+      "id": "t6_other_request",
+      "prompt": "Can you recommend a good movie to watch?",
+      "expected": "Recognizes this is not a bug report or platform question, and politely redirects the customer to the human support phone line."
+    }
+  ]
+}

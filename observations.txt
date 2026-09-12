@@ -1,0 +1,61 @@
+# Evaluation Observations
+
+## Test Suite Summary
+
+I created a test suite with 6 test cases covering all three routes:
+- 2 bug report tests (initial message and follow-up)
+- 2 FAQ tests (questions the FAQ covers)
+- 1 FAQ uncovered test (question the FAQ does not cover)
+- 1 out-of-scope request
+
+## Results
+
+| Test ID | Prompt | Score |
+|---------|--------|-------|
+| t1_bug_report | "The checkout page crashes when I click the Pay button" | 1.0 |
+| t2_bug_report_followup | "I'm using Chrome on Windows 11" | 1.0 |
+| t3_faq_shipping | "How long does shipping take?" | 1.0 |
+| t4_faq_returns | "What is your return policy?" | 1.0 |
+| t5_faq_uncovered | "Do you offer gift wrapping?" | 0.5 |
+| t6_other_request | "Can you recommend a good movie to watch?" | 1.0 |
+
+**Overall average: 0.92**
+
+## Observations
+
+- The bug report route (t1, t2) scored 1.0 because the chatbot correctly
+  asked for missing information one piece at a time and did not try to
+  file the ticket prematurely.
+
+- The FAQ route (t3, t4) scored 1.0 because the chatbot answered using
+  only the information in the embedded FAQ document.
+
+- The uncovered FAQ question (t5) scored 0.5. Looking at the generation
+  output, the chatbot mixed bug-report language ("I'm sorry to hear about
+  the crash. To help our team investigate, could you tell me what browser,
+  operating system, or device you are using?") with the correct hand-off
+  response. This happened because the harness remembered the bug-report
+  conversation from previous tests and carried that context into a
+  question that had nothing to do with a crash.
+
+- The out-of-scope request (t6) scored 1.0 because the chatbot correctly
+  classified the message as OTHER and politely redirected the customer
+  to the human support phone line.
+
+## What I Would Change
+
+Based on the evaluation results, I would:
+
+1. Add a rule to the system prompt that explicitly tells the chatbot to
+   treat each new message as independent and not carry over context from
+   previous categories. For example: "Each message should be classified
+   fresh. Do not continue a previous bug report conversation unless the
+   current message is clearly a bug report or a follow-up."
+
+2. Add more edge-case tests to the test suite, such as messages that
+   could belong to multiple categories, very short messages, and
+   messages that try to confuse the classifier (prompt injection).
+
+3. Consider whether the harness session state is causing cross-test
+   contamination, and if so, test with fresh sessions for unrelated
+   queries to isolate routing behavior.
