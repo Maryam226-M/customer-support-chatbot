@@ -10,7 +10,7 @@
   "gateway_target_name": "bugreports",
   "harness_execution_role_arn": "arn:aws:iam::989724526904:role/bug-report-tool-stack-harness-role",
   "harness_name": "support_chatbot",
-  "harness_id": "support_chatbot-BrdxRkMGbo",
-  "harness_arn": "arn:aws:bedrock-agentcore:us-east-1:989724526904:harness/support_chatbot-BrdxRkMGbo",
+  "harness_id": "support_chatbot-Cq4YDsUkbs",
+  "harness_arn": "arn:aws:bedrock-agentcore:us-east-1:989724526904:harness/support_chatbot-Cq4YDsUkbs",
   "model_id": "us.amazon.nova-pro-v1:0"
 }
